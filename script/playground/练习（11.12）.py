@@ -1531,4 +1531,40 @@
 # plt.close(fig)
 #
 # print(f"指南针已保存到: {save_path}")
-
+# def scs(x1,x2):
+#     if {i for i in x1}=={i for i in x2}:
+#         print(f"{x1},{x2}是变位词")
+# #测试
+# word1="heart"
+# word2="earth"
+# scs(word1,word2)
+# def scs(x1, x2):
+#     if len(x1) != len(x2):
+#         print("Not equal")
+#         return
+#
+#     x1 = list(x1)
+#     x2 = list(x2)
+#
+#     for ch in x1:
+#         for i, y in enumerate(x2):
+#             if ch == y:
+#                 x2[i] = None
+#                 break
+#         else:
+#             # 注意：这个 else 是跟 for 配的，不是跟 if 配的！
+#             # 只有当内层 for 没有遇到 break（也就是完全没匹配上）时才会执行
+#             print("Not equal")
+#             return
+#
+#     print("equal")
+#
+# word1="heart"
+# word2="earth"
+# scs(word1,word2)
+# def add_end(L=[]):
+#     L.append('END')
+#     return L
+# add_end([1,2,3])
+# add_end([1,2,3])
+# print(add_end([1,2,3]))
