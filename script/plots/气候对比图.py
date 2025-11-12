@@ -1,36 +1,183 @@
-import geopandas as gpd
+import os
+import numpy as np
 import matplotlib.pyplot as plt
+import rasterio
+from matplotlib.font_manager import FontProperties
 
-# 替换成你本地的路径
-shapefile_path = r"E:\桌面\武汉数据\乌珠穆沁白牛\白牛文章图片\地图\ne_110m_admin_0_countries\ne_110m_admin_0_countries.shp"
+# ==============================
+# 1. 路径与参数设置
+# ==============================
 
-# 读取 shapefile
-world = gpd.read_file(shapefile_path)
+# 气候数据根目录（你改成苏尼特左旗气候数据所在文件夹）
+climate_base_dir = r"E:\桌面\武汉数据\乌珠穆沁白牛\白牛文章\气候数据"  # TODO: 修改为你的实际路径
 
-# 示例采样点
-from shapely.geometry import Point
-import pandas as pd
+tmin_dir = os.path.join(climate_base_dir, "tmin")
+tmax_dir = os.path.join(climate_base_dir, "tmax")
+prec_dir = os.path.join(climate_base_dir, "prec")
 
-data = {
-    'Site': ['UW', 'Hanwoo'],
-    'Longitude': [109.4, 138.1],
-    'Latitude': [40.9, 36.2]
+# 苏尼特左旗坐标（经度, 纬度）
+coords = {
+    "Sunite Zuoqi": (113.6506, 43.8569)   # 苏尼特左旗
 }
-df = pd.DataFrame(data)
-gdf_points = gpd.GeoDataFrame(df, geometry=gpd.points_from_xy(df.Longitude, df.Latitude), crs='EPSG:4326')
 
-# 绘图
-fig, ax = plt.subplots(figsize=(10, 6))
-world.plot(ax=ax, color='whitesmoke', edgecolor='gray')
-gdf_points.plot(ax=ax, color='red', markersize=30)
+year = 2024
+months = np.arange(1, 13)
 
-# 添加标签
-for x, y, label in zip(df.Longitude, df.Latitude, df.Site):
-    ax.text(x + 0.5, y + 0.5, label, fontsize=15)
+# 输出目录
+out_dir = r"D:\Python\script\pythonProject\data\result"
+os.makedirs(out_dir, exist_ok=True)
 
-ax.set_xlim(40, 150)
-ax.set_ylim(15,  55)
-ax.set_title("Sampling Sites in East Asia")
-plt.axis('off')
-plt.tight_layout()
-plt.show()
+# ==============================
+# 2. 字体设置
+# ==============================
+
+# 全局默认字体：Times New Roman（数字、英文字母）
+plt.rcParams["font.family"] = "Times New Roman"
+plt.rcParams["axes.unicode_minus"] = False  # 解决负号显示问题
+
+# 中文宋体（用于标题、坐标轴标签、图例中文）
+# 如果报错，可改为绝对路径：FontProperties(fname=r"C:\Windows\Fonts\simsun.ttc")
+ch_font = FontProperties(family="SimSun")
+
+# ==============================
+# 3. 提取月尺度数据的函数
+# ==============================
+
+def extract_monthly_data(folder, year, coords_dict):
+    """
+    从 tmin/tmax/prec 文件夹中，按年份和经纬度提取 12 个月的栅格值。
+    文件命名格式示例：
+    wc2.1_cruts4.09_10m_tmin_2024-01.tif
+    """
+    monthly_values = {name: [] for name in coords_dict.keys()}
+    var_name = os.path.basename(folder)  # tmin / tmax / prec
+
+    for month in months:
+        month_str = f"{month:02d}"
+        tif_name = f"wc2.1_cruts4.09_10m_{var_name}_{year}-{month_str}.tif"
+        file_path = os.path.join(folder, tif_name)
+
+        if not os.path.exists(file_path):
+            raise FileNotFoundError(f"找不到数据文件: {file_path}")
+
+        with rasterio.open(file_path) as src:
+            band = src.read(1)
+            for name, (lon, lat) in coords_dict.items():
+                row, col = src.index(lon, lat)
+                val = band[row, col]
+                monthly_values[name].append(val)
+
+    return monthly_values
+
+# ==============================
+# 4. 读取苏尼特左旗气候数据
+# ==============================
+
+tmin_data = extract_monthly_data(tmin_dir, year, coords)
+tmax_data = extract_monthly_data(tmax_dir, year, coords)
+prec_data = extract_monthly_data(prec_dir, year, coords)
+
+site_name = "Sunite Zuoqi"
+tmin = tmin_data[site_name]
+tmax = tmax_data[site_name]
+prec = prec_data[site_name]
+
+# 统一字号略大一些，适合论文插图
+plt.rcParams["font.size"] = 12
+plt.rcParams["axes.titlesize"] = 16
+plt.rcParams["axes.labelsize"] = 14
+plt.rcParams["xtick.labelsize"] = 12
+plt.rcParams["ytick.labelsize"] = 12
+plt.rcParams["legend.fontsize"] = 12
+
+# ==============================
+# 5. 图 1：苏尼特左旗月平均最高/最低气温
+# ==============================
+
+fig, ax = plt.subplots(figsize=(8, 5))
+
+ax.plot(
+    months, tmin,
+    marker='o', linestyle='--',
+    color="#4C72B0",
+    linewidth=2.5,
+    label="最低气温"
+)
+
+ax.plot(
+    months, tmax,
+    marker='o', linestyle='-',
+    color="#C44E52",
+    linewidth=2.5,
+    label="最高气温"
+)
+
+ax.set_xticks([1, 3, 6, 9, 12])
+# 坐标轴中文标签
+ax.set_xlabel("月份", fontproperties=ch_font, fontsize=14)
+ax.set_ylabel("气温(℃)", fontproperties=ch_font, fontsize=14)
+
+ax.set_title(f"苏尼特左旗{year}年月平均最高/最低气温",
+             fontproperties=ch_font, fontsize=16)
+
+# 图例中文
+legend = ax.legend(loc="upper left")
+for text in legend.get_texts():
+    text.set_fontproperties(ch_font)
+
+ax.grid(False)
+fig.tight_layout()
+
+temp_fig_path = os.path.join(out_dir, f"苏尼特左旗_气温_{year}.png")
+fig.savefig(temp_fig_path, dpi=600)
+plt.close(fig)
+
+print(f"气温图已保存到: {temp_fig_path}")
+
+# ==============================
+# 6. 图 2：苏尼特左旗月降水量
+# ==============================
+
+fig, ax = plt.subplots(figsize=(8, 5))
+
+ax.bar(
+    months, prec,
+    width=0.6,
+    color="#55A868",
+    edgecolor="black",
+    label="降水量"
+)
+
+ax.set_xticks([1, 3, 6, 9, 12])
+ax.set_xlabel("月份", fontproperties=ch_font, fontsize=14)
+ax.set_ylabel("降水量(mm)", fontproperties=ch_font, fontsize=14)
+
+ax.set_title(f"苏尼特左旗{year}年月降水量",
+             fontproperties=ch_font, fontsize=16)
+
+legend = ax.legend(loc="upper left")
+for text in legend.get_texts():
+    text.set_fontproperties(ch_font)
+
+ax.grid(False)
+fig.tight_layout()
+
+prec_fig_path = os.path.join(out_dir, f"苏尼特左旗_降水量_{year}.png")
+fig.savefig(prec_fig_path, dpi=600)
+plt.close(fig)
+
+print(f"降水量图已保存到: {prec_fig_path}")
+
+# ==============================
+# 7. 在终端打印中文表头，方便核对
+# ==============================
+
+print(f"\n=== 苏尼特左旗{year}年月平均最高/最低气温(℃) ===")
+print("{:<6} {:<10} {:<10}".format("月份", "最低气温", "最高气温"))
+for i in range(12):
+    print("{:<6} {:<10.1f} {:<10.1f}".format(i + 1, tmin[i], tmax[i]))
+
+print(f"\n=== 苏尼特左旗{year}年月降水量(mm) ===")
+print("{:<6} {:<10}".format("月份", "降水量"))
+for i in range(12):
+    print("{:<6} {:<10.1f}".format(i + 1, prec[i]))

@@ -1371,7 +1371,7 @@
 #     print(f"Hallo,{name}")
 
 
-# 中国地图
+# 两地气候对比图
 # import rasterio
 # import numpy as np
 # import matplotlib.pyplot as plt
