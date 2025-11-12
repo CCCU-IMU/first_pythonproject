@@ -28,7 +28,7 @@ out_dir = r"D:\Python\script\pythonProject\data\result"
 os.makedirs(out_dir, exist_ok=True)
 
 # ==============================
-# 2. 字体设置
+# 2. 字体与配色
 # ==============================
 
 # 全局默认字体：Times New Roman（数字、英文字母）
@@ -38,6 +38,19 @@ plt.rcParams["axes.unicode_minus"] = False  # 解决负号显示问题
 # 中文宋体（用于标题、坐标轴标签、图例中文）
 # 如果报错，可改为绝对路径：FontProperties(fname=r"C:\Windows\Fonts\simsun.ttc")
 ch_font = FontProperties(family="SimSun")
+
+# 你指定的两种配色
+COL_TMAX = "#E73F74"   # 最高气温（洋红）
+COL_TMIN = "#11A579"   # 最低气温（绿色）
+COL_PREC = "#11A579"   # 降水量柱形同用绿色（形状区分：柱 vs 线）
+
+# 统一字号略大一些，适合论文插图
+plt.rcParams["font.size"] = 12
+plt.rcParams["axes.titlesize"] = 16
+plt.rcParams["axes.labelsize"] = 14
+plt.rcParams["xtick.labelsize"] = 12
+plt.rcParams["ytick.labelsize"] = 12
+plt.rcParams["legend.fontsize"] = 12
 
 # ==============================
 # 3. 提取月尺度数据的函数
@@ -82,16 +95,8 @@ tmin = tmin_data[site_name]
 tmax = tmax_data[site_name]
 prec = prec_data[site_name]
 
-# 统一字号略大一些，适合论文插图
-plt.rcParams["font.size"] = 12
-plt.rcParams["axes.titlesize"] = 16
-plt.rcParams["axes.labelsize"] = 14
-plt.rcParams["xtick.labelsize"] = 12
-plt.rcParams["ytick.labelsize"] = 12
-plt.rcParams["legend.fontsize"] = 12
-
 # ==============================
-# 5. 图 1：苏尼特左旗月平均最高/最低气温
+# 5. 图 1：苏尼特左旗月平均最高/最低气温（两色）
 # ==============================
 
 fig, ax = plt.subplots(figsize=(8, 5))
@@ -99,7 +104,7 @@ fig, ax = plt.subplots(figsize=(8, 5))
 ax.plot(
     months, tmin,
     marker='o', linestyle='--',
-    color="#4C72B0",
+    color=COL_TMIN,
     linewidth=2.5,
     label="最低气温"
 )
@@ -107,20 +112,16 @@ ax.plot(
 ax.plot(
     months, tmax,
     marker='o', linestyle='-',
-    color="#C44E52",
+    color=COL_TMAX,
     linewidth=2.5,
     label="最高气温"
 )
 
 ax.set_xticks([1, 3, 6, 9, 12])
-# 坐标轴中文标签
 ax.set_xlabel("月份", fontproperties=ch_font, fontsize=14)
 ax.set_ylabel("气温(℃)", fontproperties=ch_font, fontsize=14)
+ax.set_title(f"苏尼特左旗{year}年月平均最高/最低气温", fontproperties=ch_font, fontsize=16)
 
-ax.set_title(f"苏尼特左旗{year}年月平均最高/最低气温",
-             fontproperties=ch_font, fontsize=16)
-
-# 图例中文
 legend = ax.legend(loc="upper left")
 for text in legend.get_texts():
     text.set_fontproperties(ch_font)
@@ -131,11 +132,10 @@ fig.tight_layout()
 temp_fig_path = os.path.join(out_dir, f"苏尼特左旗_气温_{year}.png")
 fig.savefig(temp_fig_path, dpi=600)
 plt.close(fig)
-
 print(f"气温图已保存到: {temp_fig_path}")
 
 # ==============================
-# 6. 图 2：苏尼特左旗月降水量
+# 6. 图 2：苏尼特左旗月降水量（同用绿色）
 # ==============================
 
 fig, ax = plt.subplots(figsize=(8, 5))
@@ -143,7 +143,7 @@ fig, ax = plt.subplots(figsize=(8, 5))
 ax.bar(
     months, prec,
     width=0.6,
-    color="#55A868",
+    color=COL_PREC,
     edgecolor="black",
     label="降水量"
 )
@@ -151,9 +151,7 @@ ax.bar(
 ax.set_xticks([1, 3, 6, 9, 12])
 ax.set_xlabel("月份", fontproperties=ch_font, fontsize=14)
 ax.set_ylabel("降水量(mm)", fontproperties=ch_font, fontsize=14)
-
-ax.set_title(f"苏尼特左旗{year}年月降水量",
-             fontproperties=ch_font, fontsize=16)
+ax.set_title(f"苏尼特左旗{year}年月降水量", fontproperties=ch_font, fontsize=16)
 
 legend = ax.legend(loc="upper left")
 for text in legend.get_texts():
@@ -165,11 +163,10 @@ fig.tight_layout()
 prec_fig_path = os.path.join(out_dir, f"苏尼特左旗_降水量_{year}.png")
 fig.savefig(prec_fig_path, dpi=600)
 plt.close(fig)
-
 print(f"降水量图已保存到: {prec_fig_path}")
 
 # ==============================
-# 7. 在终端打印中文表头，方便核对
+# 7. 终端打印中文表头，方便核对
 # ==============================
 
 print(f"\n=== 苏尼特左旗{year}年月平均最高/最低气温(℃) ===")
