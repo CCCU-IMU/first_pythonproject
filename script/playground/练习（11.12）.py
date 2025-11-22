@@ -1568,3 +1568,233 @@
 # add_end([1,2,3])
 # add_end([1,2,3])
 # print(add_end([1,2,3]))
+
+# def mul(x,*args):
+#
+#     sum=x
+#     for i in args:
+#         sum=sum*i
+#     return sum
+# print(mul(5,2))
+
+# 我们要拟合的目标：希望 a * x ≈ y_true
+# 我们先造一点“假数据”：每个样本有3个特征，对应一个y
+# 真实关系：y = 2*x1 + 0.5*x2 - 1*x3 + 1 （我们故意设的真值）
+# X = [
+#     [ 1.0,  2.0,  3.0],
+#     [ 0.5, -1.0,  2.0],
+#     [ 2.0,  0.0,  1.0],
+#     [-1.0,  1.0, -0.5],
+# ]
+#
+# def true_fn(x):
+#     return 2.0*x[0] + 0.5*x[1] - 1.0*x[2] + 1.0
+#
+# Y = [true_fn(x) for x in X]
+#
+#
+# class LinearModel:
+#     def __init__(self, n_features):
+#         # 权重向量 w1, w2, w3, ...
+#         self.w = [0.0] * n_features
+#         # 偏置 b
+#         self.b = 0.0
+#
+#     def predict_one(self, x):
+#         """
+#         对单个样本 x 预测： y_hat = w·x + b
+#         x 是一个列表，例如 [x1, x2, x3]
+#         """
+#         y = self.b
+#         for wi, xi in zip(self.w, x):
+#             y += wi * xi
+#         return y
+#
+#     def predict(self, X):
+#         """
+#         对一批样本预测
+#         X 是样本列表，每个元素都是一个特征列表
+#         """
+#         return [self.predict_one(x) for x in X]
+#
+#     def loss(self, X, Y):
+#         """
+#         计算均方误差损失（MSE）
+#         """
+#         preds = self.predict(X)
+#         total = 0.0
+#         for y_hat, y_true in zip(preds, Y):
+#             total += (y_hat - y_true) ** 2
+#         return total / len(X)
+#
+#     def fit(self, X, Y, lr=0.1, epochs=50):
+#         """
+#         用最简单的“全量梯度下降”训练模型参数 self.w, self.b
+#         """
+#         n = len(X)  # 样本数
+#
+#         for epoch in range(epochs):
+#             # 1. 先算当前的预测和损失
+#             preds = self.predict(X)
+#
+#             # 2. 计算对每个参数的梯度（解析式，已经推好公式）
+#             # 初始化梯度为0
+#             grad_w = [0.0] * len(self.w)
+#             grad_b = 0.0
+#
+#             for x, y_hat, y_true in zip(X, preds, Y):
+#                 error = y_hat - y_true  # 预测 - 真实
+#
+#                 # 对每个 w_j 累加梯度
+#                 for j in range(len(self.w)):
+#                     grad_w[j] += error * x[j] / n
+#
+#                 # 对 b 的梯度
+#                 grad_b += error / n
+#
+#             # 3. 按梯度下降规则更新参数
+#             for j in range(len(self.w)):
+#                 self.w[j] -= lr * grad_w[j]
+#             self.b -= lr * grad_b
+#
+#             # 每隔几轮打印一下看看
+#             if epoch % 5 == 0 or epoch == epochs - 1:
+#                 current_loss = self.loss(X, Y)
+#                 print(f"epoch {epoch:2d}: loss={current_loss:.6f}, w={self.w}, b={self.b:.4f}")
+#
+#
+# # ======= 运行训练 =======
+# model = LinearModel(n_features=3)
+#
+# print("初始参数：", model.w, model.b, "初始loss:", model.loss(X, Y))
+# model.fit(X, Y, lr=0.1, epochs=50)
+# print("训练结束后的参数：", model.w, model.b)
+# print("真实参数应该接近: w=[2.0, 0.5, -1.0], b=1.0")
+# def move(n, a, b, c):
+#     if n == 1:
+#         print(a, '-->', c)
+#     else:
+#         move(n-1, a, c, b)
+#         print(a, '-->', c)
+#         move(n-1, b, a, c)
+
+# def trim(s):
+#     while s and s[0]==' ':
+#         s=s[1:]
+#     while s and s[-1]==' ':
+#         s=s[:-1]
+#     return s
+#
+# if trim('hello  ') != 'hello':
+#     print('测试失败!')
+# elif trim('  hello') != 'hello':
+#     print('测试失败!')
+# elif trim('  hello  ') != 'hello':
+#     print('测试失败!')
+# elif trim('  hello  world  ') != 'hello  world':
+#     print('测试失败!')
+# elif trim('') != '':
+#     print('测试失败!')
+# elif trim('    ') != '':
+#     print('测试失败!')
+# else:
+#     print('测试成功!')
+#
+# def findMinAndMax(L):
+#
+#     if not L:
+#         return (None, None)
+#     L_min = L[0]
+#     L_max = L[0]
+#     for x in L:
+#         if x < L_min:
+#             L_min = x
+#         if x > L_max:
+#             L_max = x
+#     return (L_min, L_max)
+#
+# if findMinAndMax([]) != (None, None):
+#     print('测试失败!')
+# elif findMinAndMax([7]) != (7, 7):
+#     print('测试失败!')
+# elif findMinAndMax([7, 1]) != (1, 7):
+#     print('测试失败!')
+# elif findMinAndMax([7, 1, 3, 9, 5]) != (1, 9):
+#     print('测试失败!')
+# else:
+#     print('测试成功!')
+# def trim(s):
+#     while s[0]==' ' and s!='' :
+#         s=s[1:]
+#     while s and s[-1]==' ':
+#         s=s[:-1]
+#     return s
+#
+# # 测试:
+# if trim('hello  ') != 'hello':
+#     print('测试失败!')
+# elif trim('  hello') != 'hello':
+#     print('测试失败!')
+# elif trim('  hello  ') != 'hello':
+#     print('测试失败!')
+# elif trim('  hello  world  ') != 'hello  world':
+#     print('测试失败!')
+# elif trim('') != '':
+#     print('测试失败!')
+# elif trim('    ') != '':
+#     print('测试失败!')
+# else:
+#     print('测试成功!')
+# def findMinAndMax(L):
+#     if not L:
+#         return (None, None)
+#     L_min=L[0]
+#     L_max=L[0]
+#     for i in L:
+#         if i<L_min:
+#             L_min=i
+#         if i>L_max:
+#             L_max=i
+#     return (L_min, L_max)
+#
+# if findMinAndMax([]) != (None, None):
+#     print('测试失败!')
+# elif findMinAndMax([7]) != (7, 7):
+#     print('测试失败!')
+# elif findMinAndMax([7, 1]) != (1, 7):
+#     print('测试失败!')
+# elif findMinAndMax([7, 1, 3, 9, 5]) != (1, 9):
+#     print('测试失败!')
+# else:
+#     print('测试成功!')
+def triangles():
+    L=[1]
+    while True:
+        yield L
+        L=[1]+[L[i-1]+L[i]for i in range(1,len(L))]+[1]
+n = 0
+results = []
+for t in triangles():
+    results.append(t)
+    n = n + 1
+    if n == 10:
+        break
+
+for t in results:
+    print(t)
+
+if results == [
+    [1],
+    [1, 1],
+    [1, 2, 1],
+    [1, 3, 3, 1],
+    [1, 4, 6, 4, 1],
+    [1, 5, 10, 10, 5, 1],
+    [1, 6, 15, 20, 15, 6, 1],
+    [1, 7, 21, 35, 35, 21, 7, 1],
+    [1, 8, 28, 56, 70, 56, 28, 8, 1],
+    [1, 9, 36, 84, 126, 126, 84, 36, 9, 1]
+]:
+    print('测试通过!')
+else:
+    print('测试失败!')
