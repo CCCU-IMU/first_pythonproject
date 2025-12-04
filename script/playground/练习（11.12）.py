@@ -405,6 +405,8 @@
 # import pandas as pd
 # from fontTools.misc.bezierTools import splitCubic
 # from fontTools.misc.cython import returns
+from past.builtins import reduce
+
 
 # s=pd.Series([1,2,4,np.nan,6,8])
 # time=pd.date_range('20230201', periods=6,freq='D')
@@ -1767,34 +1769,122 @@
 #     print('测试失败!')
 # else:
 #     print('测试成功!')
-def triangles():
-    L=[1]
-    while True:
-        yield L
-        L=[1]+[L[i-1]+L[i]for i in range(1,len(L))]+[1]
-n = 0
-results = []
-for t in triangles():
-    results.append(t)
-    n = n + 1
-    if n == 10:
-        break
+# def triangles():
+#     L=[1]
+#     while True:
+#         yield L
+#         L=[1]+[L[i-1]+L[i]for i in range(1,len(L))]+[1]
+# n = 0
+# results = []
+# for t in triangles():
+#     results.append(t)
+#     n = n + 1
+#     if n == 10:
+#         break
+#
+# for t in results:
+#     print(t)
+#
+# if results == [
+#     [1],
+#     [1, 1],
+#     [1, 2, 1],
+#     [1, 3, 3, 1],
+#     [1, 4, 6, 4, 1],
+#     [1, 5, 10, 10, 5, 1],
+#     [1, 6, 15, 20, 15, 6, 1],
+#     [1, 7, 21, 35, 35, 21, 7, 1],
+#     [1, 8, 28, 56, 70, 56, 28, 8, 1],
+#     [1, 9, 36, 84, 126, 126, 84, 36, 9, 1]
+# ]:
+#     print('测试通过!')
+# else:
+#     print('测试失败!')
+# L1 = ['Hello', 'World', 18, 'Apple', None]
+# print([x.lower() for x in L1 if isinstance(x,str)])
+# def triangles():
+#     L=[1]
+#     while True:
+#         yield L
+#         L=[1]+[L[i]+L[i+1] for i in range(len(L)-1)]+[1]
 
-for t in results:
-    print(t)
-
-if results == [
-    [1],
-    [1, 1],
-    [1, 2, 1],
-    [1, 3, 3, 1],
-    [1, 4, 6, 4, 1],
-    [1, 5, 10, 10, 5, 1],
-    [1, 6, 15, 20, 15, 6, 1],
-    [1, 7, 21, 35, 35, 21, 7, 1],
-    [1, 8, 28, 56, 70, 56, 28, 8, 1],
-    [1, 9, 36, 84, 126, 126, 84, 36, 9, 1]
-]:
-    print('测试通过!')
-else:
-    print('测试失败!')
+# 期待输出:
+# [1]
+# [1, 1]
+# [1, 2, 1]
+# [1, 3, 3, 1]
+# [1, 4, 6, 4, 1]
+# [1, 5, 10, 10, 5, 1]
+# [1, 6, 15, 20, 15, 6, 1]
+# [1, 7, 21, 35, 35, 21, 7, 1]
+# [1, 8, 28, 56, 70, 56, 28, 8, 1]
+# [1, 9, 36, 84, 126, 126, 84, 36, 9, 1]
+# n = 0
+# results = []
+# for t in triangles():
+#     results.append(t)
+#     n = n + 1
+#     if n == 10:
+#         break
+#
+# for t in results:
+#     print(t)
+#
+# if results == [
+#     [1],
+#     [1, 1],
+#     [1, 2, 1],
+#     [1, 3, 3, 1],
+#     [1, 4, 6, 4, 1],
+#     [1, 5, 10, 10, 5, 1],
+#     [1, 6, 15, 20, 15, 6, 1],
+#     [1, 7, 21, 35, 35, 21, 7, 1],
+#     [1, 8, 28, 56, 70, 56, 28, 8, 1],
+#     [1, 9, 36, 84, 126, 126, 84, 36, 9, 1]
+# ]:
+#     print('测试通过!')
+# else:
+#     print('测试失败!')
+#
+# def normalize(name):
+#     n=list(name.lower())
+#     n[0]=n[0].upper()
+#     return ''.join(n)
+#
+# # 测试:
+# L1 = ['adam', 'LISA', 'barT']
+# L2 = list(map(normalize, L1))
+# print(L2)
+# from functools import reduce
+#
+# def prod(L):
+#     return reduce(lambda x, y: x * y, L)
+#
+# print('3 * 5 * 7 * 9 =', prod([3, 5, 7, 9]))
+# if prod([3, 5, 7, 9]) == 945:
+#     print('测试成功!')
+# else:
+#     print('测试失败!')
+from functools import reduce
+#
+# def str2float(s):
+#     po_index=s.find('.')
+#     if po_index == -1:
+#         return s
+#     int_part=s[:po_index]
+#     float_part=s[po_index+1:]
+#     int_v=0
+#     float_v=0
+#     for i in int_part:
+#         int_v=int_v*10+int(i)
+#     len_f=len(float_part)
+#     for i in float_part:
+#         float_v=float_v*10+int(i)
+#     float_v=float_v/10**len_f
+#     return int_v+float_v
+#
+# print('str2float(\'123.456\') =', str2float('123.456'))
+# if abs(str2float('123.456') - 123.456) < 0.00001:
+#     print('测试成功!')
+# else:
+#     print('测试失败!')
