@@ -1888,3 +1888,9 @@ from functools import reduce
 #     print('测试成功!')
 # else:
 #     print('测试失败!')
+# numbers = [1, 2, 3, 4, 5]
+#
+# even_numbers = list(filter(lambda x: x % 2 == 0, numbers))
+# print(even_numbers)  # [2, 4]
+# even_numbers2 = list(x for x in numbers if x % 2 == 0)
+# print(even_numbers2)  # [2, 4]

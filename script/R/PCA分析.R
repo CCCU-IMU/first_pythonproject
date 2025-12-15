@@ -27,7 +27,6 @@ custom_colors <- c(
   "Mo-SN" = "#f0639f",
   "Simmental" = "#cbc46e",
   "UW" = "#97d4c5",
-  "Yanbian" = "#6e91cb"
 )
 
 # 定义一个绘图函数，生成指定两个主成分的图，并保存为高分辨率图片

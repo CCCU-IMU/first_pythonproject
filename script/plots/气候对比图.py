@@ -2,179 +2,163 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 import rasterio
-from matplotlib.font_manager import FontProperties
 
 # ==============================
-# 1. 路径与参数设置
+# 1. Paths & Parameters
 # ==============================
 
-# 气候数据根目录（你改成苏尼特左旗气候数据所在文件夹）
-climate_base_dir = r"E:\桌面\武汉数据\乌珠穆沁白牛\白牛文章\气候数据"  # TODO: 修改为你的实际路径
+# TODO: change to your climate data folder
+climate_base_dir = r"E:\桌面\武汉数据\乌珠穆沁白牛\白牛文章\气候数据"
 
 tmin_dir = os.path.join(climate_base_dir, "tmin")
 tmax_dir = os.path.join(climate_base_dir, "tmax")
 prec_dir = os.path.join(climate_base_dir, "prec")
 
-# 苏尼特左旗坐标（经度, 纬度）
-coords = {
-    "Sunite Zuoqi": (113.6506, 43.8569)   # 苏尼特左旗
-}
-
 year = 2024
 months = np.arange(1, 13)
 
-# 输出目录
+# TODO: update coordinates (lon, lat)
+coords = {
+    "West Ujimqin": (117.60, 44.58),   # 西乌珠穆沁旗（示例：巴彦胡硕附近，可按你的研究点改）
+    "Charolais":    (4.28,  46.43),    # 夏洛莱地区（示例：Charolles 附近，可按你的研究点改）
+}
+
+# output directory
 out_dir = r"D:\Python\script\pythonProject\data\result"
 os.makedirs(out_dir, exist_ok=True)
 
 # ==============================
-# 2. 字体与配色
+# 2. Font & Style
 # ==============================
-
-# 全局默认字体：Times New Roman（数字、英文字母）
 plt.rcParams["font.family"] = "Times New Roman"
-plt.rcParams["axes.unicode_minus"] = False  # 解决负号显示问题
+plt.rcParams["axes.unicode_minus"] = False
 
-# 中文宋体（用于标题、坐标轴标签、图例中文）
-# 如果报错，可改为绝对路径：FontProperties(fname=r"C:\Windows\Fonts\simsun.ttc")
-ch_font = FontProperties(family="SimSun")
-
-# 你指定的两种配色
-COL_TMAX = "#E73F74"   # 最高气温（洋红）
-COL_TMIN = "#11A579"   # 最低气温（绿色）
-COL_PREC = "#11A579"   # 降水量柱形同用绿色（形状区分：柱 vs 线）
-
-# 统一字号略大一些，适合论文插图
 plt.rcParams["font.size"] = 12
-plt.rcParams["axes.titlesize"] = 16
-plt.rcParams["axes.labelsize"] = 14
+plt.rcParams["axes.titlesize"] = 18
+plt.rcParams["axes.labelsize"] = 16
 plt.rcParams["xtick.labelsize"] = 12
 plt.rcParams["ytick.labelsize"] = 12
-plt.rcParams["legend.fontsize"] = 12
+plt.rcParams["legend.fontsize"] = 14
+
+# Color palette similar to your sample
+COL_WU = "#D08C60"     # West Ujimqin (warm brown)
+COL_CH = "#0A8F4E"     # Charolais (green)
 
 # ==============================
-# 3. 提取月尺度数据的函数
+# 3. Helpers
 # ==============================
-
 def extract_monthly_data(folder, year, coords_dict):
     """
-    从 tmin/tmax/prec 文件夹中，按年份和经纬度提取 12 个月的栅格值。
-    文件命名格式示例：
+    Read 12 monthly raster values for each site (lon/lat).
+    File name example:
     wc2.1_cruts4.09_10m_tmin_2024-01.tif
     """
     monthly_values = {name: [] for name in coords_dict.keys()}
     var_name = os.path.basename(folder)  # tmin / tmax / prec
 
-    for month in months:
-        month_str = f"{month:02d}"
+    for m in range(1, 13):
+        month_str = f"{m:02d}"
         tif_name = f"wc2.1_cruts4.09_10m_{var_name}_{year}-{month_str}.tif"
         file_path = os.path.join(folder, tif_name)
 
         if not os.path.exists(file_path):
-            raise FileNotFoundError(f"找不到数据文件: {file_path}")
+            raise FileNotFoundError(f"Missing file: {file_path}")
 
         with rasterio.open(file_path) as src:
             band = src.read(1)
             for name, (lon, lat) in coords_dict.items():
                 row, col = src.index(lon, lat)
                 val = band[row, col]
-                monthly_values[name].append(val)
+                monthly_values[name].append(float(val))
 
     return monthly_values
 
-# ==============================
-# 4. 读取苏尼特左旗气候数据
-# ==============================
+def maybe_scale_temperature(arr):
+    """
+    Some datasets store temperature as °C*10.
+    If values look too large (e.g. 150, -230), scale by /10.
+    """
+    arr = np.array(arr, dtype=float)
+    if np.nanmax(np.abs(arr)) > 100:
+        arr = arr / 10.0
+    return arr
 
+# ==============================
+# 4. Load data
+# ==============================
 tmin_data = extract_monthly_data(tmin_dir, year, coords)
 tmax_data = extract_monthly_data(tmax_dir, year, coords)
 prec_data = extract_monthly_data(prec_dir, year, coords)
 
-site_name = "Sunite Zuoqi"
-tmin = tmin_data[site_name]
-tmax = tmax_data[site_name]
-prec = prec_data[site_name]
+wu_tmin = maybe_scale_temperature(tmin_data["West Ujimqin"])
+wu_tmax = maybe_scale_temperature(tmax_data["West Ujimqin"])
+wu_prec = np.array(prec_data["West Ujimqin"], dtype=float)
+
+ch_tmin = maybe_scale_temperature(tmin_data["Charolais"])
+ch_tmax = maybe_scale_temperature(tmax_data["Charolais"])
+ch_prec = np.array(prec_data["Charolais"], dtype=float)
 
 # ==============================
-# 5. 图 1：苏尼特左旗月平均最高/最低气温（两色）
+# 5. Figure A: Monthly Precipitation Comparison
 # ==============================
+fig, ax = plt.subplots(figsize=(10, 6))
 
-fig, ax = plt.subplots(figsize=(8, 5))
+bar_w = 0.38
+ax.bar(months - bar_w/2, wu_prec, width=bar_w, color=COL_WU, label="West Ujimqin")
+ax.bar(months + bar_w/2, ch_prec, width=bar_w, color=COL_CH, label="Charolais")
 
-ax.plot(
-    months, tmin,
-    marker='o', linestyle='--',
-    color=COL_TMIN,
-    linewidth=2.5,
-    label="最低气温"
-)
-
-ax.plot(
-    months, tmax,
-    marker='o', linestyle='-',
-    color=COL_TMAX,
-    linewidth=2.5,
-    label="最高气温"
-)
-
+ax.set_xlabel("Month")
+ax.set_ylabel("Precipitation (mm)")
+ax.set_title(f"{year} Monthly Precipitation Comparison")
 ax.set_xticks([1, 3, 6, 9, 12])
-ax.set_xlabel("月份", fontproperties=ch_font, fontsize=14)
-ax.set_ylabel("气温(℃)", fontproperties=ch_font, fontsize=14)
-ax.set_title(f"苏尼特左旗{year}年月平均最高/最低气温", fontproperties=ch_font, fontsize=16)
 
-legend = ax.legend(loc="upper left")
-for text in legend.get_texts():
-    text.set_fontproperties(ch_font)
-
+ax.legend(loc="upper right", frameon=True)
 ax.grid(False)
 fig.tight_layout()
 
-temp_fig_path = os.path.join(out_dir, f"苏尼特左旗_气温_{year}.png")
-fig.savefig(temp_fig_path, dpi=600)
-plt.close(fig)
-print(f"气温图已保存到: {temp_fig_path}")
-
-# ==============================
-# 6. 图 2：苏尼特左旗月降水量（同用绿色）
-# ==============================
-
-fig, ax = plt.subplots(figsize=(8, 5))
-
-ax.bar(
-    months, prec,
-    width=0.6,
-    color=COL_PREC,
-    edgecolor="black",
-    label="降水量"
-)
-
-ax.set_xticks([1, 3, 6, 9, 12])
-ax.set_xlabel("月份", fontproperties=ch_font, fontsize=14)
-ax.set_ylabel("降水量(mm)", fontproperties=ch_font, fontsize=14)
-ax.set_title(f"苏尼特左旗{year}年月降水量", fontproperties=ch_font, fontsize=16)
-
-legend = ax.legend(loc="upper left")
-for text in legend.get_texts():
-    text.set_fontproperties(ch_font)
-
-ax.grid(False)
-fig.tight_layout()
-
-prec_fig_path = os.path.join(out_dir, f"苏尼特左旗_降水量_{year}.png")
+prec_fig_path = os.path.join(out_dir, f"Precipitation_Comparison_{year}.png")
 fig.savefig(prec_fig_path, dpi=600)
 plt.close(fig)
-print(f"降水量图已保存到: {prec_fig_path}")
+print(f"Saved: {prec_fig_path}")
 
 # ==============================
-# 7. 终端打印中文表头，方便核对
+# 6. Figure B: Monthly Tmin/Tmax Comparison
 # ==============================
+fig, ax = plt.subplots(figsize=(10, 6))
 
-print(f"\n=== 苏尼特左旗{year}年月平均最高/最低气温(℃) ===")
-print("{:<6} {:<10} {:<10}".format("月份", "最低气温", "最高气温"))
-for i in range(12):
-    print("{:<6} {:<10.1f} {:<10.1f}".format(i + 1, tmin[i], tmax[i]))
+# West Ujimqin
+ax.plot(months, wu_tmin, marker="o", linestyle="--", linewidth=3, color=COL_WU, alpha=0.35, label="West Ujimqin Tmin")
+ax.plot(months, wu_tmax, marker="o", linestyle="-",  linewidth=3, color=COL_WU, alpha=1.00, label="West Ujimqin Tmax")
 
-print(f"\n=== 苏尼特左旗{year}年月降水量(mm) ===")
-print("{:<6} {:<10}".format("月份", "降水量"))
+# Charolais
+ax.plot(months, ch_tmin, marker="o", linestyle="--", linewidth=3, color=COL_CH, alpha=0.35, label="Charolais Tmin")
+ax.plot(months, ch_tmax, marker="o", linestyle="-",  linewidth=3, color=COL_CH, alpha=1.00, label="Charolais Tmax")
+
+ax.set_xlabel("Month")
+ax.set_ylabel("Temperature (°C)")
+ax.set_title(f"{year} Monthly Tmin/Tmax Comparison")
+ax.set_xticks([1, 3, 6, 9, 12])
+
+ax.legend(loc="lower center", frameon=True, ncol=2)
+ax.grid(False)
+fig.tight_layout()
+
+temp_fig_path = os.path.join(out_dir, f"Temperature_Comparison_{year}.png")
+fig.savefig(temp_fig_path, dpi=600)
+plt.close(fig)
+print(f"Saved: {temp_fig_path}")
+
+# ==============================
+# 7. Print tables (for checking)
+# ==============================
+print(f"\n=== {year} Monthly Temperature (°C): West Ujimqin vs Charolais ===")
+print("{:<6} {:<14} {:<14} {:<14} {:<14}".format("Month", "WU Tmin", "WU Tmax", "CH Tmin", "CH Tmax"))
 for i in range(12):
-    print("{:<6} {:<10.1f}".format(i + 1, prec[i]))
+    print("{:<6} {:<14.1f} {:<14.1f} {:<14.1f} {:<14.1f}".format(
+        i+1, wu_tmin[i], wu_tmax[i], ch_tmin[i], ch_tmax[i]
+    ))
+
+print(f"\n=== {year} Monthly Precipitation (mm): West Ujimqin vs Charolais ===")
+print("{:<6} {:<14} {:<14}".format("Month", "WU Prec", "CH Prec"))
+for i in range(12):
+    print("{:<6} {:<14.1f} {:<14.1f}".format(i+1, wu_prec[i], ch_prec[i]))

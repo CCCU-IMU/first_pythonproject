@@ -33,7 +33,11 @@ data/raw/
 
 # 结果输出（图表、导出文件，如果你想上传图，就把这一段删掉）
 data/result/
-
+# PS文档
+script/PS/
+# 不想上传的脚本
+script/plots/染色体Loter.py
+script/plots/SVG改色.py
 # ===================== 系统文件 =====================
 
 # macOS
