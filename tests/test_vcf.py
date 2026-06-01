@@ -2,8 +2,8 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from first_pythonproject.cli import main
-from first_pythonproject.vcf import (
+from livestock_genomics_toolkit.cli import main
+from livestock_genomics_toolkit.vcf import (
     fst_between_populations,
     load_population_map,
     nucleotide_diversity,

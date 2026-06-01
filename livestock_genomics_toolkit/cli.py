@@ -19,7 +19,7 @@ from .vcf import (
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
-        prog="first-pythonproject",
+        prog="livestock-genomics-toolkit",
         description="Bioinformatics analysis and visualization helpers.",
     )
     subparsers = parser.add_subparsers(dest="command", required=True)

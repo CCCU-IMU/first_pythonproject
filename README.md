@@ -1,6 +1,6 @@
-# first_pythonproject
+# Livestock Genomics Toolkit
 
-`first_pythonproject` 是一个面向群体遗传学、生信分析教学和科研绘图复用的脚本库。项目把本地知识库中已经验证过的 R/Python 脚本整理为公开仓库，并新增一个可测试的 Python 小工具包，用于轻量级 VCF 统计、PCA/FST/Tajima's D 等结果的 SVG 可视化，以及脚本复现文档。
+`Livestock Genomics Toolkit` 是一个面向群体遗传学、生信分析教学和科研绘图复用的脚本库。项目把本地知识库中已经验证过的 R/Python 脚本整理为公开仓库，并新增一个可测试的 Python 小工具包，用于轻量级 VCF 统计、PCA/FST/Tajima's D 等结果的 SVG 可视化，以及脚本复现文档。
 
 ## 适用场景
 
@@ -12,13 +12,13 @@
 ## 仓库结构
 
 ```text
-first_pythonproject/       # 可安装的 Python 辅助包
+livestock_genomics_toolkit/       # 可安装的 Python 辅助包
 script/R/                  # 传统 R 绘图和下游分析脚本
 script/plots/              # 既有 Python 绘图脚本
 script/bash/               # 外部工具调用示例
 examples/demo_data/        # 可公开的极小示例数据
 tests/                     # 标准库 unittest 测试
-docs/                      # 脚本目录、维护计划、申请材料草稿
+docs/                      # 脚本目录和维护计划
 ```
 
 ## 快速开始
@@ -26,13 +26,13 @@ docs/                      # 脚本目录、维护计划、申请材料草稿
 ```bash
 python -m pip install -e .
 python -m unittest discover -s tests
-python -m first_pythonproject vcf-stats \
+python -m livestock_genomics_toolkit vcf-stats \
   --vcf examples/demo_data/demo.vcf \
   --populations examples/demo_data/populations.tsv \
   --outdir demo_out \
   --window-size 10000 \
   --fst PopA PopB
-python -m first_pythonproject plot-line \
+python -m livestock_genomics_toolkit plot-line \
   --table demo_out/fst_PopA_vs_PopB.tsv \
   --x pos \
   --y fst \
@@ -46,7 +46,7 @@ python -m first_pythonproject plot-line \
 
 本仓库保留两类脚本：
 
-- `first_pythonproject/`：经过整理、可测试、适合逐步扩展为稳定接口。
+- `livestock_genomics_toolkit/`：经过整理、可测试、适合逐步扩展为稳定接口。
 - `script/`：科研工作流中沉淀的可复用脚本模板，优先保留原始逻辑和图形风格，后续逐步参数化。
 
 纯 Python VCF 统计用于小数据教学、结果 sanity check 和 CI 示例，不替代 PLINK、vcftools、bcftools、selscan、ADMIXTURE 等专业工具。

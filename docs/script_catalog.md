@@ -56,9 +56,9 @@ This catalog turns the local knowledge base into a maintainable open-source inde
 
 | Command | Purpose |
 | --- | --- |
-| `python -m first_pythonproject vcf-stats` | Generate small VCF pi, Tajima's D, and optional FST tables |
-| `python -m first_pythonproject plot-pca` | Render PLINK PCA output to SVG |
-| `python -m first_pythonproject plot-line` | Render any numeric TSV x/y table to SVG |
+| `python -m livestock_genomics_toolkit vcf-stats` | Generate small VCF pi, Tajima's D, and optional FST tables |
+| `python -m livestock_genomics_toolkit plot-pca` | Render PLINK PCA output to SVG |
+| `python -m livestock_genomics_toolkit plot-line` | Render any numeric TSV x/y table to SVG |
 
 ## Known Cleanup Tasks
 

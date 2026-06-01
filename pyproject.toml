@@ -3,7 +3,7 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "first-pythonproject"
+name = "livestock-genomics-toolkit"
 version = "0.1.0"
 description = "Bioinformatics analysis and visualization script library for population genetics workflows."
 readme = "README.md"
@@ -19,7 +19,7 @@ classifiers = [
 ]
 
 [project.scripts]
-first-pythonproject = "first_pythonproject.cli:main"
+livestock-genomics-toolkit = "livestock_genomics_toolkit.cli:main"
 
 [tool.setuptools.packages.find]
-include = ["first_pythonproject*"]
+include = ["livestock_genomics_toolkit*"]
