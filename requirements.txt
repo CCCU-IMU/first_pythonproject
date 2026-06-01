@@ -1,0 +1,9 @@
+# Optional dependencies used by legacy plotting scripts under script/plots/.
+# The maintained core package intentionally uses only the Python standard library.
+pandas
+numpy
+matplotlib
+seaborn
+openpyxl
+biopython
+requests

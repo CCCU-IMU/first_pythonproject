@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "first-pythonproject"
+version = "0.1.0"
+description = "Bioinformatics analysis and visualization script library for population genetics workflows."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+authors = [{ name = "CCCU-IMU" }]
+keywords = ["bioinformatics", "population-genetics", "visualization", "vcf", "genomics"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "License :: OSI Approved :: MIT License",
+  "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+
+[project.scripts]
+first-pythonproject = "first_pythonproject.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["first_pythonproject*"]

@@ -1,47 +1,38 @@
-# ===================== Python 相关 =====================
-
-# 虚拟环境
+# Python
 .venv/
-
-# PyCharm 配置
-.idea/
-
-# Python 编译产生的文件
+venv/
 __pycache__/
-*.pyc
+*.py[cod]
 *.pyo
 *.pyd
+.pytest_cache/
+.mypy_cache/
+*.egg-info/
+build/
+dist/
 
-# 日志、临时文件
+# R / RStudio
+.Rproj.user/
+*.Rproj
+.Rhistory
+.RData
+.Ruserdata
+
+# Local data and generated outputs
+data/raw/
+data/intermediate/
+data/result/
+demo_out/
+results/
+outputs/
 *.log
 *.tmp
 
-# ===================== R / RStudio 相关 =====================
-
-# RStudio 工程配置
-.Rproj.user/
-*.Rproj
-
-# R 命令历史
-.Rhistory
-.RData
-
-# ===================== 数据与输出 =====================
-
-# 原始数据（避免把大文件、隐私数据传上去）
-data/raw/
-
-# 结果输出（图表、导出文件，如果你想上传图，就把这一段删掉）
-data/result/
-# PS文档
+# Large local-only design files
 script/PS/
-# 不想上传的脚本
-script/plots/染色体Loter.py
-script/plots/SVG改色.py
-# ===================== 系统文件 =====================
 
-# macOS
+# IDE and OS files
+.idea/
+.vscode/
 .DS_Store
-
-# Windows
 Thumbs.db
