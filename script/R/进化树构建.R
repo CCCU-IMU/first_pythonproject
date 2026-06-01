@@ -4,7 +4,7 @@ library(ggtree)    # 绘制进化树
 library(ggplot2)   # 绘图
 
 # 设置工作目录
-setwd("E:/桌面/武汉数据/进化分析/Tree/")
+setwd("data/raw/进化分析/Tree/")
 
 # 读取距离矩阵和样本 ID
 dist_mat <- as.matrix(read.table("distance_matrix.dist", header = FALSE))

@@ -31,8 +31,8 @@ sysfonts::font_add(
 showtext::showtext_auto(enable = TRUE)
 
 ## 3) paths
-in_dir  <- "E:/桌面/武汉数据/乌珠穆沁白牛/10-13-ROH/result"
-out_dir <- "E:/桌面/武汉数据/乌珠穆沁白牛/文章图汇总"
+in_dir  <- "data/raw/乌珠穆沁白牛/10-13-ROH/result"
+out_dir <- "data/raw/乌珠穆沁白牛/文章图汇总"
 if (!dir.exists(out_dir)) dir.create(out_dir, recursive = TRUE)
 
 roh_hom_path <- file.path(in_dir, "table.plink.hom.txt")

@@ -20,13 +20,13 @@ suppressPackageStartupMessages({
 # ============================================================
 # 1) 固定路径
 # ============================================================
-norm_dir <- "E:/桌面/武汉数据/乌珠穆沁白牛/单倍型分析1224/result/01.iHS/chr_iHS/"
+norm_dir <- "data/raw/乌珠穆沁白牛/单倍型分析1224/result/01.iHS/chr_iHS/"
 norm_pattern <- "\\.norm$"
 
-ihs_plot_dir <- "E:/桌面/武汉数据/乌珠穆沁白牛/单倍型分析1224/result/01.iHS/iHS_plot/"
+ihs_plot_dir <- "data/raw/乌珠穆沁白牛/单倍型分析1224/result/01.iHS/iHS_plot/"
 plot_pattern <- "\\.plot\\.txt$"
 
-out_dir <- "E:/桌面/武汉数据/乌珠穆沁白牛/文章图汇总/测试"
+out_dir <- "data/raw/乌珠穆沁白牛/文章图汇总/测试"
 interval_xlsx <- file.path(out_dir, "分析区间.xlsx")
 
 ihs_thr <- 2

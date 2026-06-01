@@ -10,7 +10,7 @@ suppressPackageStartupMessages({
 
 ## ========= 1) 读入数据（修改为你的真实路径） =========
 ## 需要的列：Chr, Start, End, Ancestry, Frequency
-dt <- fread("E:/桌面/武汉数据/乌珠穆沁白牛/10-24祖先比例/result/05.loter/loter_segment.txt")
+dt <- fread("data/raw/乌珠穆沁白牛/10-24祖先比例/result/05.loter/loter_segment.txt")
 
 ## 基本检查
 req_cols <- c("Chr","Start","End","Ancestry","Frequency")

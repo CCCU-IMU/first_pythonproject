@@ -18,8 +18,8 @@ import pandas as pd
 # 0) CONFIG：你只需要改这里
 # =========================
 
-TXT_PATH = r"E:\桌面\武汉数据\乌珠穆沁白牛\文章图汇总\测试\loter_segment.txt"   # TODO: 改成你的 loter_segment.txt 路径
-OUT_DIR = r"E:桌面\武汉数据\乌珠穆沁白牛\文章图汇总\测试"                 # TODO: 改成你的输出文件夹
+TXT_PATH = r"data\raw\乌珠穆沁白牛\文章图汇总\测试\loter_segment.txt"   # TODO: 改成你的 loter_segment.txt 路径
+OUT_DIR = r"data\raw\乌珠穆沁白牛\文章图汇总\测试"                 # TODO: 改成你的输出文件夹
 BASENAME = "loter"              # 输出文件名（不含后缀）
 
 # --- 高清输出控制（推荐用“物理宽度 + dpi”） ---

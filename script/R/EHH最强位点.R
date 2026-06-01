@@ -8,7 +8,7 @@
 options(stringsAsFactors = FALSE)
 
 # -------------------- USER SETTINGS --------------------
-input_dir <- "E:/桌面/武汉数据/乌珠穆沁白牛/文章图汇总/测试/temp/02.EHH/"
+input_dir <- "data/raw/乌珠穆沁白牛/文章图汇总/测试/temp/02.EHH/"
 interval_xlsx <- file.path(input_dir, "分析区间.xlsx")
 
 vcf_chr_dir <- input_dir   # chr*.vcf.gz 的目录（按需修改）

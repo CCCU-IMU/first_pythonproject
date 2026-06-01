@@ -19,10 +19,10 @@ library(ggbreak)
 library(grid)
 
 # ---------- 1) Paths (EDIT THESE) ----------
-CLR_FILE  <- "E:/桌面/武汉数据/乌珠穆沁白牛/文章图汇总/测试/内群/UW.CLR.xls"
-GENE_FILE <- "E:/桌面/武汉数据/乌珠穆沁白牛/文章图汇总/测试/内群/UW.CLR.merge_gene.xls"
+CLR_FILE  <- "data/raw/乌珠穆沁白牛/文章图汇总/测试/内群/UW.CLR.xls"
+GENE_FILE <- "data/raw/乌珠穆沁白牛/文章图汇总/测试/内群/UW.CLR.merge_gene.xls"
 
-OUT_DIR   <- "E:/桌面/武汉数据/乌珠穆沁白牛/文章图汇总/测试/内群/"
+OUT_DIR   <- "data/raw/乌珠穆沁白牛/文章图汇总/测试/内群/"
 dir.create(OUT_DIR, recursive = TRUE, showWarnings = FALSE)
 OUT_TIFF  <- file.path(OUT_DIR, "UW_CLR_manhattan_brokenY_top1pct_peakGene_skipLOC.tiff")
 

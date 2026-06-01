@@ -6,13 +6,13 @@ library(grid)
 # 1) 读取 KEGG 文件
 # =========================
 kegg_rich <- read.delim(
-  "E:/桌面/武汉数据/乌珠穆沁白牛/10-24祖先比例/result/05.loter/enrich/Mo-OD//KEGG/Mo-OD.kegg_rich.xls",
+  "data/raw/乌珠穆沁白牛/10-24祖先比例/result/05.loter/enrich/Mo-OD//KEGG/Mo-OD.kegg_rich.xls",
   sep = "\t",
   check.names = FALSE
 )
 
 ko_class <- read.delim(
-  "E:/桌面/武汉数据/乌珠穆沁白牛//10-24祖先比例/result/05.loter/enrich/Mo-OD/KEGG/Mo-OD.ko_classplot.xls",
+  "data/raw/乌珠穆沁白牛//10-24祖先比例/result/05.loter/enrich/Mo-OD/KEGG/Mo-OD.ko_classplot.xls",
   sep = "\t",
   check.names = FALSE
 )
@@ -116,7 +116,7 @@ print(p)
 # =========================
 # 6) 保存：TIFF，600 dpi（自动建目录）
 # =========================
-out_dir <- "E:/桌面/武汉数据/乌珠穆沁白牛/文章图汇总/测试/内群"
+out_dir <- "data/raw/乌珠穆沁白牛/文章图汇总/测试/内群"
 dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
 
 out_file <- file.path(out_dir, "MO_KEGG_top20.tiff")

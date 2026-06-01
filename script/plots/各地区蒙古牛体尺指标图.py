@@ -3,7 +3,7 @@ import numpy as np
 import os
 
 # 读数据（注意 header=1）
-df = pd.read_excel(r"E:\桌面\武汉数据\苏尼特牛\苏尼特蒙古牛测定表209头.xlsx", header=2)
+df = pd.read_excel(r"data\raw\苏尼特牛\苏尼特蒙古牛测定表209头.xlsx", header=2)
 
 # ★ 只保留母牛
 df = df[df["性别"] == "母"]

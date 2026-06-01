@@ -23,7 +23,7 @@ showtext_auto(TRUE)
 showtext_opts(dpi = 600)
 
 # 输入文件（按需改路径）
-infile <- "E:/桌面/武汉数据/乌珠穆沁白牛/文章图汇总/测试/生长/candidate_region.gene.stat.xls"
+infile <- "data/raw/乌珠穆沁白牛/文章图汇总/测试/生长/candidate_region.gene.stat.xls"
 df <- read.delim(infile, header = TRUE, sep = "\t",
                  stringsAsFactors = FALSE, check.names = FALSE)
 
@@ -74,7 +74,7 @@ fill_cols <- c(
 )
 
 # 输出路径
-out_dir <- "E:/桌面/武汉数据/乌珠穆沁白牛/文章图汇总/测试/生长"
+out_dir <- "data/raw/乌珠穆沁白牛/文章图汇总/测试/生长"
 if (!dir.exists(out_dir)) dir.create(out_dir, recursive = TRUE)
 out_jpg <- file.path(out_dir, "venn4_methods.jpg")
 

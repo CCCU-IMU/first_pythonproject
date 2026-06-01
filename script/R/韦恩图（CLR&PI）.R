@@ -1,7 +1,7 @@
 # =========================
 # Two-ellipse Venn (CLR vs θπ)
 # Output: TIFF, 600 dpi, Arial
-# Save to: E:/桌面/武汉数据/乌珠穆沁白牛/文章图汇总/测试
+# Save to: data/raw/乌珠穆沁白牛/文章图汇总/测试
 # =========================
 
 # Packages
@@ -70,7 +70,7 @@ p <- ggplot() +
   )
 
 # ---- Save path (your folder) ----
-out_dir <- "E:/桌面/武汉数据/乌珠穆沁白牛/文章图汇总/测试"
+out_dir <- "data/raw/乌珠穆沁白牛/文章图汇总/测试"
 dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
 
 out_file <- file.path(out_dir, "venn_CLR_theta_pi.tiff")

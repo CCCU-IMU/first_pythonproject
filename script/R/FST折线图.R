@@ -19,8 +19,8 @@ suppressPackageStartupMessages({
 # ============================================================
 # 1) CONFIG BLOCK  (以后只改这里)
 # ============================================================
-input_dir <- "E:/桌面/武汉数据/乌珠穆沁白牛/单倍型分析1224/result/03.Fst/plot_Fst"
-out_dir   <- "E:/桌面/武汉数据/乌珠穆沁白牛/文章图汇总/测试"
+input_dir <- "data/raw/乌珠穆沁白牛/单倍型分析1224/result/03.Fst/plot_Fst"
+out_dir   <- "data/raw/乌珠穆沁白牛/文章图汇总/测试"
 
 file_uw <- file.path(input_dir, "UW_vs_Mo-OD.PLAG1.Fst.txt")
 file_ch <- file.path(input_dir, "Charolais_vs_Mo-OD.PLAG1.Fst.txt")

@@ -6,13 +6,13 @@ library(grid)
 # 1) 读取 GO 富集结果
 # =========================
 go_rich <- read.delim(
-  "E:/桌面/武汉数据/乌珠穆沁白牛/5.22分析结果/新加分析/result/07.UW/03.Conjoint_Analysis/enrich/GO/UW.go_rich.xls",
+  "data/raw/乌珠穆沁白牛/5.22分析结果/新加分析/result/07.UW/03.Conjoint_Analysis/enrich/GO/UW.go_rich.xls",
   sep = "\t",
   check.names = FALSE
 )
 
 go_class <- read.delim(
-  "E:/桌面/武汉数据/乌珠穆沁白牛/5.22分析结果/新加分析/result/07.UW/03.Conjoint_Analysis/enrich/GO/UW.go_classplot.xls",
+  "data/raw/乌珠穆沁白牛/5.22分析结果/新加分析/result/07.UW/03.Conjoint_Analysis/enrich/GO/UW.go_classplot.xls",
   sep = "\t",
   check.names = FALSE
 )
@@ -112,7 +112,7 @@ print(p)
 # =========================
 # 5) 保存（自动建目录 + 600dpi）
 # =========================
-out_dir <- "E:/桌面/武汉数据/乌珠穆沁白牛/文章图汇总/测试/内群"
+out_dir <- "data/raw/乌珠穆沁白牛/文章图汇总/测试/内群"
 dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
 
 ggsave(

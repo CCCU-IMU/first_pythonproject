@@ -8,7 +8,7 @@ library(ggsankey)
 library(ggplot2)
 library(cols4all)
 library(cowplot)
-setwd("E:/桌面/武汉数据/乌珠穆沁白牛/12.9重跑102样本结果/result/02.Sweep/05.Conjoint_Analysis/enrich/UW_vs_Angus.UW/GO")
+setwd("data/raw/乌珠穆沁白牛/12.9重跑102样本结果/result/02.Sweep/05.Conjoint_Analysis/enrich/UW_vs_Angus.UW/GO")
 # 2. 读入你的富集结果 ----------------------------------------------------
 ## 注意：这两个 .xls 实际是 tab 分隔文本，所以用 read.delim/read.table
 go_class <- read.delim("UW_vs_Angus.UW.go_classplot.xls", check.names = FALSE)

@@ -25,10 +25,10 @@ suppressPackageStartupMessages({
 # ============================================================
 # 1) PATH CONFIG (不用再手动改区间)
 # ============================================================
-out_dir <- "E:/桌面/武汉数据/乌珠穆沁白牛/文章图汇总/测试"
+out_dir <- "data/raw/乌珠穆沁白牛/文章图汇总/测试"
 interval_xlsx <- file.path(out_dir, "分析区间.xlsx")
 
-tajima_dir <- "E:/桌面/武汉数据/乌珠穆沁白牛/单倍型分析1224/result/04.tajimasD/plot_tajimas.D/"
+tajima_dir <- "data/raw/乌珠穆沁白牛/单倍型分析1224/result/04.tajimasD/plot_tajimas.D/"
 
 # 输出子文件夹
 batch_folder_name <- "TajimasD_batch_from_分析区间"

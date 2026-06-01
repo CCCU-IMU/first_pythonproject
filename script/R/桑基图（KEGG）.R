@@ -12,9 +12,9 @@ library(grid)      # unit()
 library(stringr)   # str_wrap()
 
 # --------- 0) 参数区：你常用只改这里 ----------
-setwd("E:/桌面/武汉数据/乌珠穆沁白牛/12.9重跑102样本结果/result/02.Sweep/05.Conjoint_Analysis/enrich/UW_vs_Mo-OD.UW/KEGG")
+setwd("data/raw/乌珠穆沁白牛/12.9重跑102样本结果/result/02.Sweep/05.Conjoint_Analysis/enrich/UW_vs_Mo-OD.UW/KEGG")
 # 注意：请确保工作路径正确
-out_dir <- "E:/桌面/武汉数据/乌珠穆沁白牛/文章图汇总/测试/生长"
+out_dir <- "data/raw/乌珠穆沁白牛/文章图汇总/测试/生长"
 dir.create(out_dir, showWarnings = FALSE, recursive = TRUE)
 
 kegg_category <- "Metabolism"   # <<< 按需要改

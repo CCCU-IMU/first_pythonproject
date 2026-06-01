@@ -19,9 +19,9 @@ library(sysfonts)
 library(grid)
 
 # ---------- 1) Paths ----------
-PI_FILE    <- "E:/桌面/武汉数据/乌珠穆沁白牛/文章图汇总/测试/内群/UW.windowed.pi.xls"
-GENE_FILE  <- "E:/桌面/武汉数据/乌珠穆沁白牛/文章图汇总/测试/内群/UW.pi.merge_gene.xls"
-OUT_DIR    <- "E:/桌面/武汉数据/乌珠穆沁白牛/文章图汇总/测试/内群/"
+PI_FILE    <- "data/raw/乌珠穆沁白牛/文章图汇总/测试/内群/UW.windowed.pi.xls"
+GENE_FILE  <- "data/raw/乌珠穆沁白牛/文章图汇总/测试/内群/UW.pi.merge_gene.xls"
+OUT_DIR    <- "data/raw/乌珠穆沁白牛/文章图汇总/测试/内群/"
 SHARED_RDS <- file.path(OUT_DIR, "shared_axis.rds")
 
 dir.create(OUT_DIR, recursive = TRUE, showWarnings = FALSE)

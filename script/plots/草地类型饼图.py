@@ -100,7 +100,7 @@ ax.legend(
 plt.tight_layout()
 
 # ===================== 保存 =====================
-output_dir = r"E:\桌面\武汉数据\苏尼特牛"
+output_dir = r"data\raw\苏尼特牛"
 os.makedirs(output_dir, exist_ok=True)
 output_path = os.path.join(output_dir, "锡林郭勒盟草地资源比例图.png")
 plt.savefig(output_path, dpi=600, bbox_inches='tight')

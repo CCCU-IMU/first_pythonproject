@@ -7,7 +7,7 @@ from matplotlib.colors import LinearSegmentedColormap
 # -------------------------
 # 1. 读数据 + 基本处理
 # -------------------------
-df = pd.read_csv("E:/桌面/武汉数据/乌珠穆沁白牛/10-24祖先比例/result/05.loter/loter_segment.txt", sep="\t")
+df = pd.read_csv("data/raw/乌珠穆沁白牛/10-24祖先比例/result/05.loter/loter_segment.txt", sep="\t")
 
 # 染色体数字编号：chr1 -> 1
 df["chr_num"] = df["Chr"].str.replace("chr", "", regex=False).astype(int)

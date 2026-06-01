@@ -21,8 +21,8 @@ suppressPackageStartupMessages(library(ggrepel))
 # ============================================================
 # 1) CONFIG BLOCK (以后只改这里)
 # ============================================================
-excel_path <- "E:/桌面/武汉数据/乌珠穆沁白牛/基因筛选/分析区间.xlsx"
-out_dir    <- "E:/桌面/武汉数据/乌珠穆沁白牛/文章图汇总/测试"
+excel_path <- "data/raw/乌珠穆沁白牛/基因筛选/分析区间.xlsx"
+out_dir    <- "data/raw/乌珠穆沁白牛/文章图汇总/测试"
 
 genes_to_plot <- NULL
 use_mirror <- "asia"

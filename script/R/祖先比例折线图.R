@@ -18,10 +18,10 @@ suppressPackageStartupMessages({
 # ============================================================
 # 1) PATH CONFIG
 # ============================================================
-out_dir <- "E:/桌面/武汉数据/乌珠穆沁白牛/文章图汇总/测试"
+out_dir <- "data/raw/乌珠穆沁白牛/文章图汇总/测试"
 interval_xlsx <- file.path(out_dir, "分析区间.xlsx")
 
-loter_dir <- "E:/桌面/武汉数据/乌珠穆沁白牛/单倍型分析1224/result/02.loter/"
+loter_dir <- "data/raw/乌珠穆沁白牛/单倍型分析1224/result/02.loter/"
 ancestry_pattern <- "\\.ancestry\\.txt$"
 
 fig_w <- 8.2

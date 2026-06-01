@@ -5,8 +5,8 @@ library(ggrepel)
 library(rlang)
 
 # ===== 路径（用 / 更稳妥）=====
-in_file <- "E:/桌面/武汉数据/乌珠穆沁白牛/12.9重跑102样本结果/result/01.Population_Structure/02.pca/PCA.matrix.csv"
-out_dir <- "E:/桌面/武汉数据/乌珠穆沁白牛/12.9重跑102样本结果"
+in_file <- "data/raw/乌珠穆沁白牛/12.9重跑102样本结果/result/01.Population_Structure/02.pca/PCA.matrix.csv"
+out_dir <- "data/raw/乌珠穆沁白牛/12.9重跑102样本结果"
 if (!file.exists(in_file)) stop("找不到输入文件：", in_file)
 dir.create(out_dir, showWarnings = FALSE, recursive = TRUE)
 

@@ -9,7 +9,7 @@ library(RColorBrewer)
 library(ggsci)
 
 # --------- User config ----------
-base_path <- "E:/桌面/武汉数据/乌珠穆沁白牛/分析结果/admixture"
+base_path <- "data/raw/乌珠穆沁白牛/分析结果/admixture"
 setwd(base_path)
 
 q_pattern <- "snp\\.[0-9]+\\.Q"

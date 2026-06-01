@@ -18,15 +18,15 @@ suppressPackageStartupMessages({
 # ============================================================
 
 # ---- A) .norm 文件所在目录（每条染色体一个 .norm）----
-norm_dir <- "E:/桌面/武汉数据/乌珠穆沁白牛/单倍型分析1224/result/01.iHS/chr_iHS/"
+norm_dir <- "data/raw/乌珠穆沁白牛/单倍型分析1224/result/01.iHS/chr_iHS/"
 norm_pattern <- "\\.norm$"   # 匹配 .norm 结尾
 
 # ---- B) 候选区窗口文件（chr/start/value/Nsnp）----
 use_window_file <- TRUE
-ihs_window_file <- "E:/桌面/武汉数据/乌珠穆沁白牛/单倍型分析1224/result/01.iHS/iHS_plot/GDF11.plot.txt"
+ihs_window_file <- "data/raw/乌珠穆沁白牛/单倍型分析1224/result/01.iHS/iHS_plot/GDF11.plot.txt"
 
 # ---- C) 输出目录 ----
-out_dir <- "E:/桌面/武汉数据/乌珠穆沁白牛/文章图汇总/测试"
+out_dir <- "data/raw/乌珠穆沁白牛/文章图汇总/测试"
 
 # ---- D) 区间与阴影（bp）----
 chrom_to_plot <- "chr5"

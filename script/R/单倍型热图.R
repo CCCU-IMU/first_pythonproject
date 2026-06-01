@@ -9,7 +9,7 @@
 options(stringsAsFactors = FALSE)
 
 # -------------------- USER SETTINGS --------------------
-input_dir <- "E:/桌面/武汉数据/乌珠穆沁白牛/文章图汇总/测试/temp/01.haplotype"
+input_dir <- "data/raw/乌珠穆沁白牛/文章图汇总/测试/temp/01.haplotype"
 interval_xlsx <- file.path(input_dir, "分析区间.xlsx")
 
 genes_to_plot <- c("PMEL","ASIP","EDN3","PLAG1","GDF11","TRIM59","SMG6")

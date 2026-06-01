@@ -7,7 +7,7 @@ library(RColorBrewer)
 library(ggsci)
 
 # --------- User config ----------
-base_path <- "E:/桌面/武汉数据/乌珠穆沁白牛/12.9重跑102样本结果/result/01.Population_Structure/03.structure/01.Q_group"
+base_path <- "data/raw/乌珠穆沁白牛/12.9重跑102样本结果/result/01.Population_Structure/03.structure/01.Q_group"
 setwd(base_path)
 
 q_pattern <- "snp\\.[0-9]+\\.Q"               # 匹配 Q 文件

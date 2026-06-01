@@ -8,7 +8,7 @@ import rasterio
 # ==============================
 
 # TODO: change to your climate data folder
-climate_base_dir = r"E:\桌面\武汉数据\乌珠穆沁白牛\白牛文章\气候数据"
+climate_base_dir = r"data\raw\乌珠穆沁白牛\白牛文章\气候数据"
 
 tmin_dir = os.path.join(climate_base_dir, "tmin")
 tmax_dir = os.path.join(climate_base_dir, "tmax")

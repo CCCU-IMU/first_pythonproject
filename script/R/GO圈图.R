@@ -23,13 +23,13 @@ suppressPackageStartupMessages({
 # =========================
 # 0) 路径与参数（按需修改）
 # =========================
-go_dir <- "E:/桌面/武汉数据/乌珠穆沁白牛/12.9重跑102样本结果/result/02.Sweep/05.Conjoint_Analysis/enrich/UW_vs_Angus.UW/GO"
+go_dir <- "data/raw/乌珠穆沁白牛/12.9重跑102样本结果/result/02.Sweep/05.Conjoint_Analysis/enrich/UW_vs_Angus.UW/GO"
 go_class_file <- file.path(go_dir, "UW_vs_Angus.UW.go_classplot.xls")
 go_rich_file  <- file.path(go_dir, "UW_vs_Angus.UW.go_rich.xls")
 
-deg_file <- "E:/桌面/武汉数据/乌珠穆沁白牛/文章图汇总/测试/毛色/DEG_with_logFC.csv"
+deg_file <- "data/raw/乌珠穆沁白牛/文章图汇总/测试/毛色/DEG_with_logFC.csv"
 
-out_dir <- file.path("E:/桌面/武汉数据/乌珠穆沁白牛/文章图汇总/测试/毛色/", "GOChord_circlize_out")
+out_dir <- file.path("data/raw/乌珠穆沁白牛/文章图汇总/测试/毛色/", "GOChord_circlize_out")
 dir.create(out_dir, showWarnings = FALSE, recursive = TRUE)
 
 out_prefix  <- "UW_vs_Mo-OD"

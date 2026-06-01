@@ -2,11 +2,11 @@ library(data.table)
 library(stringr)
 
 # 1) 读入：基因区间（你上传的）
-genes <- fread("E:/桌面/武汉数据/乌珠穆沁白牛/文章图汇总/测试/毛色/candidate_region.merge_gene.xls")   # CHROM START END GENE
+genes <- fread("data/raw/乌珠穆沁白牛/文章图汇总/测试/毛色/candidate_region.merge_gene.xls")   # CHROM START END GENE
 setnames(genes, c("CHROM","START","END","GENE"))
 
 # 2) 读入：XP-EHH（你本地的那个制表符文件）
-  xpe <- fread("E:/桌面/武汉数据/乌珠穆沁白牛/文章图汇总/测试/毛色/UW_vs_Angus.xpehh.xls")  # CHROM BIN_START BIN_END xpehh
+  xpe <- fread("data/raw/乌珠穆沁白牛/文章图汇总/测试/毛色/UW_vs_Angus.xpehh.xls")  # CHROM BIN_START BIN_END xpehh
 
 # 3) 清洗 xpehh（你示例里有 -0.28563s 这种尾巴，要去掉非数字字符）
 xpe[, xpehh := as.numeric(gsub("[^0-9eE+\\-\\.]", "", xpehh))]
@@ -35,4 +35,4 @@ gene_score[, ID := gsub("^gene-", "", GENE)]
 gene_score[, logFC := as.numeric(scale(signed_max))]  # 标准化一下，颜色更均匀
 out <- gene_score[, .(ID, logFC)]
 
-fwrite(out, "E:/桌面/武汉数据/乌珠穆沁白牛/文章图汇总/测试/毛色/DEG_with_logFC.csv")   # 你之前GOplot脚本里 deg_file 指向它即可
+fwrite(out, "data/raw/乌珠穆沁白牛/文章图汇总/测试/毛色/DEG_with_logFC.csv")   # 你之前GOplot脚本里 deg_file 指向它即可
